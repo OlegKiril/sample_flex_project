@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:components="components.*"
+			   xmlns:local="*"
+			   width="480" height="600" preinitialize="initApp();">
+	
+	<!-- Exercise 1.05: Experimenting with container layouts -->
+	
+	
+	<fx:Script> 
+		
+		<![CDATA[ 		
+			import components.MyPopupComponent;
+			
+			import flash.events.Event;
+			
+			import mx.controls.Alert;
+			
+			import spark.components.SkinnablePopUpContainer;
+			import spark.components.TitleWindow;
+			
+			[Embed(source="../res/textWarehouses/config.xml", mimeType="application/octet-stream")]
+			private static const MyData:Class;
+			
+			[Bindable]
+			private var xml:XML;
+			
+			[Bindable]
+			private var userId:String;
+			
+			private function initApp():void {			
+				var byteArray:ByteArray = new MyData() as ByteArray;
+				xml = new XML(byteArray.readUTFBytes(byteArray.length));				
+			}
+			
+			private function myEventHandler(e:Event):void { 				
+				var myPopupComponent:MyPopupComponent = new MyPopupComponent;
+				userId = String(e.currentTarget.id);
+				myPopupComponent.userName = getUserAttribute(userId, "name");
+				myPopupComponent.phoneHome = getUserAttribute(userId, "phoneHome");
+				myPopupComponent.phoneMobile = getUserAttribute(userId, "phoneMobile");
+				myPopupComponent.email = getUserAttribute(userId, "email");
+				myPopupComponent.photoLink = getUserAttribute(userId, "photoLink");
+				myPopupComponent.videoLink = getUserAttribute(userId, "videoLink");
+				myPopupComponent.open(this);					
+			}
+			
+			private function getUserAttribute(userId:String, userAttribute:String):String { 
+				switch (userId){
+					case "id_0" : var userAttributeString:String = xml.User_0.attribute(userAttribute); break; 
+					case "id_1" : userAttributeString = xml.User_1.attribute(userAttribute); break; 
+					case "id_2" : userAttributeString = xml.User_2.attribute(userAttribute); break; 
+					case "id_3" : userAttributeString = xml.User_3.attribute(userAttribute); break; 
+					case "id_4" : userAttributeString = xml.User_4.attribute(userAttribute); break; 
+					case "id_5" : userAttributeString = xml.User_5.attribute(userAttribute); break; 
+					case "id_6" : userAttributeString = xml.User_6.attribute(userAttribute); break; 
+					case "id_7" : userAttributeString = xml.User_7.attribute(userAttribute); break; 
+					case "id_8" : userAttributeString = xml.User_8.attribute(userAttribute); break; 
+					case "id_9" : userAttributeString = xml.User_9.attribute(userAttribute); break; 
+				}
+				return userAttributeString;
+			}				
+		]]> 
+	</fx:Script> 
+	
+	
+	<!--<fx:Declarations>
+	<components:UserList/>
+	</fx:Declarations>-->
+	
+	<!--<fx:Declarations>
+	<components:Popup id="popup"/>
+	</fx:Declarations>-->
+	
+	<fx:Declarations>
+		<components:MyPopupComponent id="popup"/>
+	</fx:Declarations>
+	
+	
+	<!-- Properties of the parent ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingLeft="0" paddingTop="0"/>
+	</s:layout>
+	
+	<!-- Metadata ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	
+	<!-- Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<fx:Style source="Styles.css"/>
+	
+	<!-- Script ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	
+	<!-- Declarations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	
+	<!-- UI components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	<s:Label width="480" height="30" paddingLeft="0" styleName="titleHeader" 
+			 text="Employee Portal: Employee Directory" textAlign="center" verticalAlign="middle"/>
+	
+	<s:BorderContainer width="250" height="362" borderColor="#808080" borderWeight="2"
+					   cornerRadius="5" textAlign="center">
+		<s:layout>
+			<s:TileLayout horizontalAlign="left" orientation="columns" verticalAlign="top"/>
+		</s:layout>
+		<s:Group id="employeeGroup" left="100" width="247" height="359" textAlign="center">
+			
+			<s:layout>
+				<s:TileLayout horizontalAlign="center" paddingTop="15"/>
+			</s:layout>
+			
+			<components:EmployeeDisplay empImage="{xml.User_0.attribute('photoLink')}" 
+										empName="{xml.User_0.attribute('name')}" 
+										y="86"
+										id="id_0"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_1.attribute('photoLink')}" 
+										empName="{xml.User_1.attribute('name')}"
+										id="id_1"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_2.attribute('photoLink')}" 
+										empName="{xml.User_2.attribute('name')}"
+										id="id_2"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_3.attribute('photoLink')}" 
+										empName="{xml.User_3.attribute('name')}"
+										id="id_3"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_4.attribute('photoLink')}" 
+										empName="{xml.User_4.attribute('name')}"
+										id="id_4"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_5.attribute('photoLink')}" 
+										empName="{xml.User_5.attribute('name')}"
+										id="id_5"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_6.attribute('photoLink')}" 
+										empName="{xml.User_6.attribute('name')}"
+										id="id_6"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_7.attribute('photoLink')}" 
+										empName="{xml.User_7.attribute('name')}"
+										x="138" 
+										y="197"
+										id="id_7"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_8.attribute('photoLink')}" 
+										empName="{xml.User_8.attribute('name')}" 
+										x="138" y="197"
+										id="id_8"
+										click="myEventHandler(event)"/>
+			
+			<components:EmployeeDisplay empImage="{xml.User_9.attribute('photoLink')}" 
+										empName="{xml.User_9.attribute('name')}" 
+										x="138" y="197"
+										id="id_9"
+										click="myEventHandler(event)"/>
+		</s:Group>
+		
+		<s:Scroller viewport="{employeeGroup}"/>
+		
+	</s:BorderContainer>
+	
+</s:Application>
+
+
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+						   xmlns:s="library://ns.adobe.com/flex/spark"
+						   x="0" y="0" width="480" height="600" skinClass="skins.MyPopupSkin">
+	
+	
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]	
+			public var userName:String;
+			[Bindable]
+			public var phoneHome:String;
+			[Bindable]
+			public var phoneMobile:String;
+			[Bindable]
+			public var email:String;
+			[Bindable]
+			public var photoLink:String;
+			[Bindable]
+			public var videoLink:String;
+									
+		]]>
+	</fx:Script>
+	
+	<s:TitleWindow width="480" height="33" close="close()" title="{userName}">	</s:TitleWindow>
+		
+	<!-- Also uses the MyPopupSkin.mxml class -->
+	<s:VGroup y="32" width="480" height="568" horizontalAlign="center" paddingBottom="8"
+			  paddingLeft="8" paddingRight="8" paddingTop="8">
+				
+		<s:Form x="0" width="480" height="187" textAlign="right">
+			<s:layout>
+				<s:HorizontalLayout/>
+			</s:layout>
+			<s:FormItem width="164" height="124">
+				<s:layout>
+					<s:HorizontalLayout/>
+				</s:layout>
+				<s:BitmapImage source="{photoLink}"
+							   width="80" height="80"/>
+			</s:FormItem>
+			<s:FormItem height="124">
+				<s:layout>
+					<s:VerticalLayout/>
+				</s:layout>
+				<s:FormItem  label="Email:" textAlign="left">
+					<s:TextInput id="userEmail" width="145" text="{email}"/>
+				</s:FormItem>
+				<s:FormItem width="222" label="Phone:" textAlign="left">
+					<s:DropDownList width="140"
+									selectedIndex="1"> 
+						<s:ArrayCollection>
+							<fx:String>{phoneHome}</fx:String>
+							<fx:String>{phoneMobile}</fx:String>
+							
+						</s:ArrayCollection>
+					</s:DropDownList>
+				</s:FormItem>
+			</s:FormItem>
+			
+			
+		</s:Form>
+		<s:VideoPlayer width="325" height="267" autoPlay="false"
+					   source="{videoLink}"/>
+		<s:Button label="Close" click="this.close()"/>
+		
+	</s:VGroup>  
+	
+</s:SkinnablePopUpContainer>

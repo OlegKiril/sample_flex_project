@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<config>  
+<User_0  
+name = "Tory Forrester"
+phoneHome = "000-000-000"
+phoneMobile = "000-000-222"
+email = "Forrester@mail"
+photoLink = "images/tforrester.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_0>
+
+<User_1  
+name = "Athena Parker"
+phoneHome = "111-111-111"
+phoneMobile = "111-111-000"
+email = "Parker@mail"
+photoLink = "images/aparker.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_1>
+
+<User_2  
+name = "Saul Tucker"
+phoneHome = "222-222-222"
+phoneMobile = "222-222-111"
+email = "Ivan@mail"
+photoLink = "images/stucker.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_2>
+
+<User_3  
+name = "Samuel Ang"
+phoneHome = "333-333-333"
+phoneMobile = "333-333-111"
+email = "Ang@mail"
+photoLink = "images/sang.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_3>
+
+<User_4  
+name = "Dianna Beers"
+phoneHome = "444-444-444"
+phoneMobile = "444-444-111"
+email = "Beers@mail"
+photoLink = "images/dbeers.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_4>
+
+<User_5  
+name = "Eric Doral"
+phoneHome = "555-555-555"
+phoneMobile = "555-555-111"
+email = "Doral@mail"
+photoLink = "images/edoral.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_5>
+
+<User_6  
+name = "Galen Thompson"
+phoneHome = "666-666-666"
+phoneMobile = "666-666-111"
+email = "Thompson@mail"
+photoLink = "images/gthompson.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_6>
+
+<User_7  
+name = "Alyssa Le"
+phoneHome = "777-777-777"
+phoneMobile = "777-777-111"
+email = "Le@mail"
+photoLink = "images/ale.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_7>
+
+<User_8  
+name = "Leo Benson"
+phoneHome = "888-888-888"
+phoneMobile = "888-888-111"
+email = "Benson@mail"
+photoLink = "images/lbenson.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_8>
+
+<User_9  
+name = "Simon Fore"
+phoneHome = "999-999-999"
+phoneMobile = "999-999-111"
+email = "Fore@mail"
+photoLink = "images/sfore.jpg"
+videoLink = "../res/video/movbbb.mp4"
+></User_9>
+
+</config>  
+
