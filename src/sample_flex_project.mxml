@@ -3,182 +3,113 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:components="components.*"
-			   xmlns:local="*"
-			   width="480" height="600" preinitialize="initApp();">
+			   minWidth="1024" minHeight="768" creationComplete="employeeService.send()"
+			   currentState="loginState" skinClass="skins.AppSkin"
+			   viewSourceURL="srcview/index.html">
 	
-	<!-- Exercise 1.05: Experimenting with container layouts -->
-	
-	
-	<fx:Script> 
-		
-		<![CDATA[ 		
-			import components.MyPopupComponent;
+	<fx:Script>
+		<![CDATA[
+			import events.ShowPreview;
 			
-			import flash.events.Event;
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.ResultEvent;
 			
-			import mx.controls.Alert;
-			
-			import spark.components.SkinnablePopUpContainer;
-			import spark.components.TitleWindow;
-			
-			[Embed(source="../res/textWarehouses/config.xml", mimeType="application/octet-stream")]
-			private static const MyData:Class;
+			import skins.AppSkin;
 			
 			[Bindable]
-			private var xml:XML;
-			
-			[Bindable]
-			private var userId:String;
-			
-			private function initApp():void {			
-				var byteArray:ByteArray = new MyData() as ByteArray;
-				xml = new XML(byteArray.readUTFBytes(byteArray.length));				
+			private var usersData:ArrayCollection;
+									
+			private function employeeService_resultHandler(event:ResultEvent):void{
+				usersData = event.result.usersData.userData;
 			}
 			
-			private function myEventHandler(e:Event):void { 				
+			private function chooseEmployee_showPreviewHandler(event:ShowPreview):void{		
 				var myPopupComponent:MyPopupComponent = new MyPopupComponent;
-				userId = String(e.currentTarget.id);
-				myPopupComponent.userName = getUserAttribute(userId, "name");
-				myPopupComponent.phoneHome = getUserAttribute(userId, "phoneHome");
-				myPopupComponent.phoneMobile = getUserAttribute(userId, "phoneMobile");
-				myPopupComponent.email = getUserAttribute(userId, "email");
-				myPopupComponent.photoLink = getUserAttribute(userId, "photoLink");
-				myPopupComponent.videoLink = getUserAttribute(userId, "videoLink");
-				myPopupComponent.open(this);					
+				myPopupComponent.userData = event.userData;
+				myPopupComponent.usersData = usersData;
+				myPopupComponent.open(this);			
 			}
 			
-			private function getUserAttribute(userId:String, userAttribute:String):String { 
-				switch (userId){
-					case "id_0" : var userAttributeString:String = xml.User_0.attribute(userAttribute); break; 
-					case "id_1" : userAttributeString = xml.User_1.attribute(userAttribute); break; 
-					case "id_2" : userAttributeString = xml.User_2.attribute(userAttribute); break; 
-					case "id_3" : userAttributeString = xml.User_3.attribute(userAttribute); break; 
-					case "id_4" : userAttributeString = xml.User_4.attribute(userAttribute); break; 
-					case "id_5" : userAttributeString = xml.User_5.attribute(userAttribute); break; 
-					case "id_6" : userAttributeString = xml.User_6.attribute(userAttribute); break; 
-					case "id_7" : userAttributeString = xml.User_7.attribute(userAttribute); break; 
-					case "id_8" : userAttributeString = xml.User_8.attribute(userAttribute); break; 
-					case "id_9" : userAttributeString = xml.User_9.attribute(userAttribute); break; 
+			private function attemptLogin():void{
+				if(username.text==usersData[0].login && password.text==usersData[0].password){
+					currentState='portalState';
 				}
-				return userAttributeString;
-			}				
-		]]> 
-	</fx:Script> 
-	
-	
-	<!--<fx:Declarations>
-	<components:UserList/>
-	</fx:Declarations>-->
-	
-	<!--<fx:Declarations>
-	<components:Popup id="popup"/>
-	</fx:Declarations>-->
+			}			  
+		]]>
+	</fx:Script>
 	
 	<fx:Declarations>
-		<components:MyPopupComponent id="popup"/>
+		<s:HTTPService id="employeeService" 
+					   url="data/usersData.xml"
+					   result="employeeService_resultHandler(event)" />
+		
+		<components:MyPopupComponent id="popup" />
+		
+				
 	</fx:Declarations>
 	
+	<s:states>
+		<s:State name="portalState"  />
+		<s:State name="loginState" />
+	</s:states>
+			
+	<!--These are the transitions between the portalState and the loginState.-->
+	<s:transitions>
+		
+		<!--Transition when a user logs in to the application.-->
+		<s:Transition fromState="loginState" toState="portalState">
+			<s:Sequence>
+				<s:Parallel>
+					<s:Fade target="{login}"/>			
+					<s:Move target="{login}" 
+							xTo="-266"/>									
+				</s:Parallel>
+				
+				<!--Controls when the view state change defined by a RemoveChild property occurs.-->
+				<s:RemoveAction target="{login}"/>				
+				    <s:Fade target="{navigationTab}"/>							
+					<s:AddAction target="{navigationTab}"/>					
+					<s:Move target="{navigationTab}"
+							xFrom="1500" />				
+			</s:Sequence>
+		</s:Transition>
+	</s:transitions>
 	
-	<!-- Properties of the parent ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	<s:layout>
-		<s:VerticalLayout horizontalAlign="center" paddingLeft="0" paddingTop="0"/>
-	</s:layout>
-	
-	<!-- Metadata ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	
-	
-	<!-- Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	<fx:Style source="Styles.css"/>
-	
-	<!-- Script ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	
-	
-	<!-- Declarations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	
-	
-	<!-- UI components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	
-	
-	<s:Label width="480" height="30" paddingLeft="0" styleName="titleHeader" 
-			 text="Employee Portal: Employee Directory" textAlign="center" verticalAlign="middle"/>
-	
-	<s:BorderContainer width="250" height="362" borderColor="#808080" borderWeight="2"
-					   cornerRadius="5" textAlign="center">
+	<mx:TabNavigator id="navigationTab" includeIn="portalState" width="600" height="500" x="50" y="20" >
+		<s:NavigatorContent label="Graph">
+			
+			<s:BorderContainer x="119" y="23" width="272" height="380" borderColor="#808080" borderWeight="2"
+							   cornerRadius="5" textAlign="center">
+				
+				<s:layout>
+					<s:TileLayout horizontalAlign="left" orientation="columns" verticalAlign="top"/>
+				</s:layout>
+				<components:GraphTab id="graphTab"
+									 usersData="{usersData}"
+									 x="30" y="90"
+									 showPreview="chooseEmployee_showPreviewHandler(event)"/>
+				
+			</s:BorderContainer>
+		</s:NavigatorContent>
+		
+		<s:NavigatorContent label="All data">
+			
+			<components:AllDataTab id="allDataTab"
+								 usersData="{usersData}"
+								 x="30" y="90"/>
+						
+		</s:NavigatorContent>
+	</mx:TabNavigator>
+			
+	<s:Panel id="login" includeIn="loginState" x="50" y="50" width="30%" height="30%" title="LOGIN">
 		<s:layout>
-			<s:TileLayout horizontalAlign="left" orientation="columns" verticalAlign="top"/>
+			<s:VerticalLayout gap="10" paddingTop="15" paddingBottom="15" paddingRight="15" paddingLeft="15"/>		
 		</s:layout>
-		<s:Group id="employeeGroup" left="100" width="247" height="359" textAlign="center">
-			
-			<s:layout>
-				<s:TileLayout horizontalAlign="center" paddingTop="15"/>
-			</s:layout>
-			
-			<components:EmployeeDisplay empImage="{xml.User_0.attribute('photoLink')}" 
-										empName="{xml.User_0.attribute('name')}" 
-										y="86"
-										id="id_0"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_1.attribute('photoLink')}" 
-										empName="{xml.User_1.attribute('name')}"
-										id="id_1"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_2.attribute('photoLink')}" 
-										empName="{xml.User_2.attribute('name')}"
-										id="id_2"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_3.attribute('photoLink')}" 
-										empName="{xml.User_3.attribute('name')}"
-										id="id_3"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_4.attribute('photoLink')}" 
-										empName="{xml.User_4.attribute('name')}"
-										id="id_4"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_5.attribute('photoLink')}" 
-										empName="{xml.User_5.attribute('name')}"
-										id="id_5"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_6.attribute('photoLink')}" 
-										empName="{xml.User_6.attribute('name')}"
-										id="id_6"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_7.attribute('photoLink')}" 
-										empName="{xml.User_7.attribute('name')}"
-										x="138" 
-										y="197"
-										id="id_7"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_8.attribute('photoLink')}" 
-										empName="{xml.User_8.attribute('name')}" 
-										x="138" y="197"
-										id="id_8"
-										click="myEventHandler(event)"/>
-			
-			<components:EmployeeDisplay empImage="{xml.User_9.attribute('photoLink')}" 
-										empName="{xml.User_9.attribute('name')}" 
-										x="138" y="197"
-										id="id_9"
-										click="myEventHandler(event)"/>
-		</s:Group>
-		
-		<s:Scroller viewport="{employeeGroup}"/>
-		
-	</s:BorderContainer>
+		<s:Label x="26" y="33" text="Username:"/>
+		<s:TextInput id="username" x="97" y="23"/>
+		<s:Label x="26" y="71" text="Password:"/>
+		<s:TextInput id="password" x="97" y="61" displayAsPassword="true"/>
+		<s:Button label="Sumbit" click="attemptLogin()"/>
+	</s:Panel>
 	
 </s:Application>
-
-
-

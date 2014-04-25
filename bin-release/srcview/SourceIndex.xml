@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of TestTask2</title>
+	<nodes>
+		<node label="html-template">
+			<node label="history">
+				<node icon="cssIcon" label="history.css" url="source/html-template/history/history.css.html"/>
+				<node label="history.js" url="source/html-template/history/history.js.txt"/>
+				<node icon="htmlIcon" label="historyFrame.html" url="source/html-template/history/historyFrame.html"/>
+			</node>
+			<node icon="htmlIcon" label="index.template.html" url="source/html-template/index.template.html"/>
+			<node icon="swfIcon" label="playerProductInstall.swf" url="source/html-template/playerProductInstall.swf"/>
+			<node label="swfobject.js" url="source/html-template/swfobject.js.txt"/>
+		</node>
+		<node label="libs">
+		</node>
+		<node label="src">
+			<node icon="packageIcon" label="components" expanded="true">
+				<node icon="mxmlIcon" label="AllDataTab.mxml" url="source/components/AllDataTab.mxml.html"/>
+				<node icon="mxmlIcon" label="EmployeeDisplay.mxml" url="source/components/EmployeeDisplay.mxml.html"/>
+				<node icon="mxmlIcon" label="GraphTab.mxml" url="source/components/GraphTab.mxml.html"/>
+				<node icon="mxmlIcon" label="MyPopupComponent.mxml" url="source/components/MyPopupComponent.mxml.html"/>
+				<node icon="mxmlIcon" label="Preview.mxml" url="source/components/Preview.mxml.html"/>
+			</node>
+			<node label="data">
+				<node label="usersData.xml" url="source/data/usersData.xml.txt"/>
+			</node>
+			<node icon="packageIcon" label="events" expanded="true">
+				<node icon="actionScriptIcon" label="ShowPreview.as" url="source/events/ShowPreview.as.html"/>
+			</node>
+			<node label="images">
+				<node icon="imageIcon" label="ale.jpg" url="source/images/ale.jpg.html"/>
+				<node icon="imageIcon" label="aparker.jpg" url="source/images/aparker.jpg.html"/>
+				<node icon="imageIcon" label="dbeers.jpg" url="source/images/dbeers.jpg.html"/>
+				<node icon="imageIcon" label="edoral.jpg" url="source/images/edoral.jpg.html"/>
+				<node icon="imageIcon" label="evernon.jpg" url="source/images/evernon.jpg.html"/>
+				<node icon="imageIcon" label="gthompson.jpg" url="source/images/gthompson.jpg.html"/>
+				<node icon="imageIcon" label="jcavil.jpg" url="source/images/jcavil.jpg.html"/>
+				<node icon="imageIcon" label="lbenson.jpg" url="source/images/lbenson.jpg.html"/>
+				<node icon="imageIcon" label="sang.jpg" url="source/images/sang.jpg.html"/>
+				<node icon="imageIcon" label="sfore.jpg" url="source/images/sfore.jpg.html"/>
+				<node icon="imageIcon" label="stucker.jpg" url="source/images/stucker.jpg.html"/>
+				<node icon="imageIcon" label="tforrester.jpg" url="source/images/tforrester.jpg.html"/>
+			</node>
+			<node icon="packageIcon" label="skins" expanded="true">
+				<node icon="mxmlIcon" label="AppSkin.mxml" url="source/skins/AppSkin.mxml.html"/>
+			</node>
+			<node icon="mxmlAppIcon" selected="true" label="TestTask2.mxml" url="source/TestTask2.mxml.html"/>
+		</node>
+	</nodes>
+	<zipfile label="Download source (ZIP, 79K)" url="TestTask2.zip">
+	</zipfile>
+	<sdklink label="Download Flex SDK" url="http://www.adobe.com/go/flex451_sdk_download">
+	</sdklink>
+</index>

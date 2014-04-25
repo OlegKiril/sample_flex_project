@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+    <!-- Properties of the parent ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    
+    
+    <!-- Metadata ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    
+    
+    <!-- Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    
+    
+    <!-- Script ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<fx:Script>
+		<![CDATA[
+            
+            [Bindable]
+            public var userData:Object;
+			
+			private function validatePhone():void{
+				//var event:ValidationResultEvent = mobileValidator.validate();
+			}
+			
+		]]>
+	</fx:Script>
+	
+    <!-- Declarations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<fx:Declarations>
+		<mx:PhoneNumberValidator id="mobileValidator"
+		source="{mobilePhone}"
+		property="text"
+		triggerEvent=""/>
+	</fx:Declarations>
+    
+    
+    <!-- UI components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<s:Panel x="500" width="843" height="650" rotation="90" title="{userData.firstName}">	
+		
+	
+	<!-- Also uses the MyPopupSkin.mxml class -->
+	<s:VGroup y="0" width="586" height="777"  paddingBottom="8"
+			  paddingLeft="8" paddingRight="8" paddingTop="8" textAlign="left" rotation="-90">
+		
+			<s:Form x="27" width="532" height="150" textAlign="right">
+		<s:layout>
+		<s:HorizontalLayout/>
+		</s:layout>
+		<s:FormItem width="119" height="124">
+		<s:layout>
+		<s:HorizontalLayout/>
+		</s:layout>
+		<s:BitmapImage source="images/{userData.id}.jpg"
+		width="80" height="80"/>
+		</s:FormItem>
+		<s:FormItem width="122" height="125" textAlign="left">
+		<s:FormItem width="90" label="Testov">
+		</s:FormItem>
+		<s:FormItem width="91" height="31" label=" Ivan">
+		</s:FormItem>
+		</s:FormItem>
+		<s:FormItem width="178" textAlign="left">
+		<s:DropDownList width="140"
+		selectedIndex="1"> 
+		<s:ArrayCollection>
+		<fx:String>"xz"</fx:String>
+		<fx:String>"xz"</fx:String>
+		
+		</s:ArrayCollection>
+		</s:DropDownList>
+		</s:FormItem>
+		
+		
+		</s:Form>
+		<s:Group x="1" width="584" height="601">
+		<mx:DateChooser x="10" y="10"/>
+		<s:Group x="194" y="12" width="391" height="200">
+		<s:FormItem x="10" y="73" width="371" height="43" label="Email:" textAlign="left">
+		<s:TextInput id="userEmail" x="1" y="0" width="145" text="{userData.email}"/>
+		</s:FormItem>
+		
+		<s:FormItem x="10" y="18" width="381" height="40" label="Phone:" required="true"
+		textAlign="left">
+		<s:TextInput width="140" id="mobilePhone"/>
+		</s:FormItem>
+		
+		</s:Group>
+		<s:VideoPlayer x="7" y="229" width="325" height="267" autoPlay="false"
+		source="{userData.videoLink}" textAlign="left"/>
+		<s:TextArea x="9" y="512" width="363" height="77"/>
+		<s:Button id="submitButton" x="398" y="565" label="Save" click="validatePhone()"/>
+		<!--<s:Button x="487" y="565" label="Close" click="this.close()"/>-->
+		</s:Group>
+					
+	</s:VGroup>  
+								
+		</s:Panel>
+	
+</s:Group>

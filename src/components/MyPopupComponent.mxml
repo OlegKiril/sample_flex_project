@@ -1,70 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:SkinnablePopUpContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
 						   xmlns:s="library://ns.adobe.com/flex/spark"
-						   x="0" y="0" width="480" height="600" skinClass="skins.MyPopupSkin">
-	
+						   xmlns:mx="library://ns.adobe.com/flex/mx"
+						   height="846" width="550" 
+						   xmlns:components="components.*"
+						   initialize="initPopup();">
 	
 	<fx:Script>
 		<![CDATA[
+			import events.ShowPreview;
 			
-			[Bindable]	
-			public var userName:String;
+			import flashx.textLayout.factory.TruncationOptions;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.ValidationResultEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
 			[Bindable]
-			public var phoneHome:String;
+			public var userData:Object;
 			[Bindable]
-			public var phoneMobile:String;
+			public var usersData:ArrayCollection;
 			[Bindable]
-			public var email:String;
+			private var informationTextSO:SharedObject = SharedObject.getLocal("informationText");				
 			[Bindable]
-			public var photoLink:String;
-			[Bindable]
-			public var videoLink:String;
+			private var _userArray:Array = [];
+			
+			private function initPopup():void
+			{
+				_userArray=informationTextSO.data._userArray;
+				var userName:String = String(userData.lastName);
+				if(_userArray && _userArray.length ){
+					for(var i:int=0; i<_userArray.length; i++){
+						if(_userArray[i][0]==userName && _userArray[i][1]){
+							information.text = _userArray[i][1];
+						}
+					}
+				}
+			}
+			
+			private function mobilePhoneCange():void
+			{
+				mobileValidator.validate();
+			}
+			
+			private function submitButtonClicked():void
+			{
+				var userExist:Boolean = false;
+				_userArray=informationTextSO.data._userArray;
+				var userName:String = String(userData.lastName);
+				if(_userArray && _userArray.length ){
+					for(var i:int=0; i<_userArray.length; i++){
+						if(_userArray[i][0]==userName && _userArray[i][1]){
+							_userArray[i][1] = information.text ;
+							userExist = true;
+						}
+					}
+				}
+				if(userExist==false){
+					var arr:Array = [userName,information.text]
+						if(_userArray && _userArray.length){
+					_userArray.push(arr);
+						}else{
+							_userArray = new Array;
+							_userArray = [arr];
+						}
+				}
+				informationTextSO.data._userArray = _userArray;
+				informationTextSO.flush();
+				submitButton.enabled = false;
+			}
 									
+			private function chooseUserHandler(e:IndexChangeEvent):void
+			{
+				var userExist:Boolean = false;
+				userData=dropDownList.selectedItem;
+				_userArray=informationTextSO.data._userArray;
+				var userName:String = String(userData.lastName);
+				if(_userArray && _userArray.length ){
+					for(var i:int=0; i<_userArray.length; i++){
+						if(_userArray[i][0]==userName && _userArray[i][1]){
+							information.text = _userArray[i][1];
+							userExist = true;
+						}
+					}
+				}
+				if(userExist==false){
+					information.text = "";
+				}
+			}
+			
+			private function displayDate(chooseDate:Date):void {
+				var thisDate:Date = new Date;
+				var dateForDayRemaining:Date = new Date(thisDate.fullYear, int(usersData[0].month_of_birth), int(usersData[0].day_of_birth));
+				var daysRemaining:int = (thisDate.getTime() - dateForDayRemaining.getTime())/1000/60/60/24;			
+				var birthdayDate:Date = new Date(int(usersData[0].year_of_birth), int(usersData[0].month_of_birth), int(usersData[0].day_of_birth));		
+				var userFullYears:int = (thisDate.getTime() - birthdayDate.getTime())/1000/60/60/24/365;
+								
+				 Alert.show("Сьогодні "+thisDate.date+"/"+thisDate.month+"/"+thisDate.fullYear+" До дня народження "+userData.firstName +" залишилося: "+Math.abs(daysRemaining)+" днів. " +
+					"Зараз " + userData.firstName +" " +userFullYears+"."); 
+			}
+			
+			private function textAreaCange(e:Event):void
+			{
+				submitButton.enabled = true;				
+			}
+			
 		]]>
 	</fx:Script>
-	
-	<s:TitleWindow width="480" height="33" close="close()" title="{userName}">	</s:TitleWindow>
 		
+	
+	<!-- Declarations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<fx:Declarations>
+		<mx:PhoneNumberValidator id="mobileValidator"
+								 source="{mobilePhone}"
+								 property="text"
+								 triggerEvent=""/>
+	</fx:Declarations>
+	
+	<s:Panel x="700" y="20" width="760" height="650" rotation="90" textAlign="center" title="{userData.firstName}" />	
+		
+	
 	<!-- Also uses the MyPopupSkin.mxml class -->
-	<s:VGroup y="32" width="480" height="568" horizontalAlign="center" paddingBottom="8"
-			  paddingLeft="8" paddingRight="8" paddingTop="8">
-				
-		<s:Form x="0" width="480" height="187" textAlign="right">
+	<s:VGroup x="50" y="20" width="586" height="777" paddingBottom="8" paddingLeft="8"
+			  paddingRight="8" paddingTop="8" textAlign="left">
+		
+		<s:Form x="27" width="532" height="150" textAlign="right">
 			<s:layout>
 				<s:HorizontalLayout/>
 			</s:layout>
-			<s:FormItem width="164" height="124">
+			<s:FormItem width="119" height="124">
 				<s:layout>
 					<s:HorizontalLayout/>
 				</s:layout>
-				<s:BitmapImage source="{photoLink}"
+				<s:BitmapImage source="images/{userData.id}.jpg"
 							   width="80" height="80"/>
 			</s:FormItem>
-			<s:FormItem height="124">
-				<s:layout>
-					<s:VerticalLayout/>
-				</s:layout>
-				<s:FormItem  label="Email:" textAlign="left">
-					<s:TextInput id="userEmail" width="145" text="{email}"/>
+			<s:FormItem width="196" height="125" textAlign="left">
+				<s:FormItem x="-1" y="0" width="147" label="{userData.firstName}" fontSize="18"
+							textDecoration="underline">
 				</s:FormItem>
-				<s:FormItem width="222" label="Phone:" textAlign="left">
-					<s:DropDownList width="140"
-									selectedIndex="1"> 
-						<s:ArrayCollection>
-							<fx:String>{phoneHome}</fx:String>
-							<fx:String>{phoneMobile}</fx:String>
-							
-						</s:ArrayCollection>
-					</s:DropDownList>
+				<s:FormItem width="148" height="31" label="{userData.lastName}" fontSize="18"
+							textDecoration="underline">
 				</s:FormItem>
 			</s:FormItem>
-			
-			
+			<s:FormItem width="178" textAlign="left">
+				<s:DropDownList id="dropDownList" 
+								dataProvider="{usersData}" 
+								prompt="{userData.firstName}"
+								labelField="firstName"
+								width="150"
+								change="chooseUserHandler(event);"/>
+			</s:FormItem>			
 		</s:Form>
-		<s:VideoPlayer width="325" height="267" autoPlay="false"
-					   source="{videoLink}"/>
-		<s:Button label="Close" click="this.close()"/>
 		
+		<s:Group x="1" width="584" height="601">
+			
+			<mx:DateChooser x="10" y="10"
+							change="displayDate(DateChooser(event.target).selectedDate)"/>
+			
+			<s:Group x="194" y="12" width="391" height="200">
+				<s:FormItem x="10" y="73" width="371" height="35" label="Email:" textAlign="left">
+					<s:Label width="262" height="22" text="{userData.email}"/>
+				</s:FormItem>
+				
+				<s:FormItem x="10" y="18" width="381" height="40" label="Phone:" required="true"
+							textAlign="left">
+					<s:TextInput width="140" id="mobilePhone" change="mobilePhoneCange()"/>
+				</s:FormItem>
+				
+			</s:Group>
+			<s:VideoPlayer x="7" y="229" width="325" height="267" autoPlay="false"
+						   source="{userData.videoLink}" textAlign="left"/>
+			<s:TextArea id="information" x="9" y="512" width="363" height="77" change="textAreaCange(event)"/>
+			<mx:Button id="submitButton" x="398" y="565" label="Save" enabled="false" click="submitButtonClicked()"/>
+			<s:Button x="487" y="565" label="Close" click="this.close()"/>
+		</s:Group>
+				
 	</s:VGroup>  
-	
+	<!--</s:Panel>-->
 </s:SkinnablePopUpContainer>

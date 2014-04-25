@@ -1,0 +1,124 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>TestTask2.mxml</title>
+<link rel="stylesheet" type="text/css" href="../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="MXMLProcessing_Instruction">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="MXMLComponent_Tag">&lt;s:Application</span><span class="MXMLDefault_Text"> xmlns:fx="</span><span class="MXMLString">http://ns.adobe.com/mxml/2009</span><span class="MXMLDefault_Text">"
+               xmlns:s="</span><span class="MXMLString">library://ns.adobe.com/flex/spark</span><span class="MXMLDefault_Text">"
+               xmlns:mx="</span><span class="MXMLString">library://ns.adobe.com/flex/mx</span><span class="MXMLDefault_Text">"
+               xmlns:components="</span><span class="MXMLString">components.*</span><span class="MXMLDefault_Text">"
+               minWidth="</span><span class="MXMLString">1024</span><span class="MXMLDefault_Text">" minHeight="</span><span class="MXMLString">768</span><span class="MXMLDefault_Text">" creationComplete="</span><span class="ActionScriptDefault_Text">employeeService</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">send</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span><span class="MXMLDefault_Text">"
+               currentState="</span><span class="MXMLString">loginState</span><span class="MXMLDefault_Text">" skinClass="</span><span class="MXMLString">skins.AppSkin</span><span class="MXMLDefault_Text">"
+               viewSourceURL="</span><span class="MXMLString">srcview/index.html</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">&gt;</span>
+    
+    <span class="MXMLSpecial_Tag">&lt;fx:Script&gt;</span>
+        &lt;![CDATA[
+            <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ShowPreview</span>;
+            
+            <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">mx</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">collections</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ArrayCollection</span>;
+            <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">mx</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rpc</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ResultEvent</span>;
+            
+            <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">skins</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">AppSkin</span>;
+            
+            <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptMetadata">Bindable</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">usersData</span>:<span class="ActionScriptDefault_Text">ArrayCollection</span>;
+                                    
+            <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">employeeService_resultHandler</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span>:<span class="ActionScriptDefault_Text">ResultEvent</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span><span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">usersData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">result</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">usersData</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">userData</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">chooseEmployee_showPreviewHandler</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span>:<span class="ActionScriptDefault_Text">ShowPreview</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span><span class="ActionScriptBracket/Brace">{</span>        
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">myPopupComponent</span>:<span class="ActionScriptDefault_Text">MyPopupComponent</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">MyPopupComponent</span>;
+                <span class="ActionScriptDefault_Text">myPopupComponent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">userData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">userData</span>;
+                <span class="ActionScriptDefault_Text">myPopupComponent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">usersData</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">usersData</span>;
+                <span class="ActionScriptDefault_Text">myPopupComponent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">open</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span><span class="ActionScriptBracket/Brace">)</span>;            
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">attemptLogin</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span><span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">if</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">username</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">text</span><span class="ActionScriptOperator">==</span><span class="ActionScriptDefault_Text">usersData</span><span class="ActionScriptBracket/Brace">[</span>0<span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">login</span> <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptDefault_Text">password</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">text</span><span class="ActionScriptOperator">==</span><span class="ActionScriptDefault_Text">usersData</span><span class="ActionScriptBracket/Brace">[</span>0<span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">password</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptDefault_Text">currentState</span><span class="ActionScriptOperator">=</span><span class="ActionScriptString">'portalState'</span>;
+                <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptBracket/Brace">}</span>              
+        <span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">&gt;</span>
+    <span class="MXMLSpecial_Tag">&lt;/fx:Script&gt;</span>
+    
+    <span class="MXMLSpecial_Tag">&lt;fx:Declarations&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:HTTPService</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">employeeService</span><span class="MXMLDefault_Text">" 
+                       url="</span><span class="MXMLString">data/usersData.xml</span><span class="MXMLDefault_Text">"
+                       result="</span><span class="ActionScriptDefault_Text">employeeService_resultHandler</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span><span class="ActionScriptBracket/Brace">)</span><span class="MXMLDefault_Text">" </span><span class="MXMLComponent_Tag">/&gt;</span>
+        
+        <span class="MXMLComponent_Tag">&lt;components:MyPopupComponent</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">popup</span><span class="MXMLDefault_Text">" </span><span class="MXMLComponent_Tag">/&gt;</span>
+        
+                
+    <span class="MXMLSpecial_Tag">&lt;/fx:Declarations&gt;</span>
+    
+    <span class="MXMLComponent_Tag">&lt;s:states&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:State</span><span class="MXMLDefault_Text"> name="</span><span class="MXMLString">portalState</span><span class="MXMLDefault_Text">"  </span><span class="MXMLComponent_Tag">/&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:State</span><span class="MXMLDefault_Text"> name="</span><span class="MXMLString">loginState</span><span class="MXMLDefault_Text">" </span><span class="MXMLComponent_Tag">/&gt;</span>
+    <span class="MXMLComponent_Tag">&lt;/s:states&gt;</span>
+            
+    <span class="MXMLComment">&lt;!--</span><span class="MXMLComment">These are the transitions between the portalState and the loginState.</span><span class="MXMLComment">--&gt;</span>
+    <span class="MXMLComponent_Tag">&lt;s:transitions&gt;</span>
+        
+        <span class="MXMLComment">&lt;!--</span><span class="MXMLComment">Transition when a user logs in to the application.</span><span class="MXMLComment">--&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:Transition</span><span class="MXMLDefault_Text"> fromState="</span><span class="MXMLString">loginState</span><span class="MXMLDefault_Text">" toState="</span><span class="MXMLString">portalState</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">&gt;</span>
+            <span class="MXMLComponent_Tag">&lt;s:Sequence&gt;</span>
+                <span class="MXMLComponent_Tag">&lt;s:Parallel&gt;</span>
+                    <span class="MXMLComponent_Tag">&lt;s:Fade</span><span class="MXMLDefault_Text"> target="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">login</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>            
+                    <span class="MXMLComponent_Tag">&lt;s:Move</span><span class="MXMLDefault_Text"> target="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">login</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">" 
+                            xTo="</span><span class="MXMLString">-266</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>                                    
+                <span class="MXMLComponent_Tag">&lt;/s:Parallel&gt;</span>
+                
+                <span class="MXMLComment">&lt;!--</span><span class="MXMLComment">Controls when the view state change defined by a RemoveChild property occurs.</span><span class="MXMLComment">--&gt;</span>
+                <span class="MXMLComponent_Tag">&lt;s:RemoveAction</span><span class="MXMLDefault_Text"> target="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">login</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>                
+                    <span class="MXMLComponent_Tag">&lt;s:Fade</span><span class="MXMLDefault_Text"> target="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">navigationTab</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>                            
+                    <span class="MXMLComponent_Tag">&lt;s:AddAction</span><span class="MXMLDefault_Text"> target="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">navigationTab</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>                    
+                    <span class="MXMLComponent_Tag">&lt;s:Move</span><span class="MXMLDefault_Text"> target="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">navigationTab</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">"
+                            xFrom="</span><span class="MXMLString">1500</span><span class="MXMLDefault_Text">" </span><span class="MXMLComponent_Tag">/&gt;</span>                
+            <span class="MXMLComponent_Tag">&lt;/s:Sequence&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;/s:Transition&gt;</span>
+    <span class="MXMLComponent_Tag">&lt;/s:transitions&gt;</span>
+    
+    <span class="MXMLComponent_Tag">&lt;mx:TabNavigator</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">navigationTab</span><span class="MXMLDefault_Text">" includeIn="</span><span class="MXMLString">portalState</span><span class="MXMLDefault_Text">" width="</span><span class="MXMLString">600</span><span class="MXMLDefault_Text">" height="</span><span class="MXMLString">500</span><span class="MXMLDefault_Text">" x="</span><span class="MXMLString">50</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">20</span><span class="MXMLDefault_Text">" </span><span class="MXMLComponent_Tag">&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:NavigatorContent</span><span class="MXMLDefault_Text"> label="</span><span class="MXMLString">Graph</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">&gt;</span>
+            
+            <span class="MXMLComponent_Tag">&lt;s:BorderContainer</span><span class="MXMLDefault_Text"> x="</span><span class="MXMLString">119</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">23</span><span class="MXMLDefault_Text">" width="</span><span class="MXMLString">272</span><span class="MXMLDefault_Text">" height="</span><span class="MXMLString">380</span><span class="MXMLDefault_Text">" borderColor="</span><span class="MXMLString">#808080</span><span class="MXMLDefault_Text">" borderWeight="</span><span class="MXMLString">2</span><span class="MXMLDefault_Text">"
+                               cornerRadius="</span><span class="MXMLString">5</span><span class="MXMLDefault_Text">" textAlign="</span><span class="MXMLString">center</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">&gt;</span>
+                
+                <span class="MXMLComponent_Tag">&lt;s:layout&gt;</span>
+                    <span class="MXMLComponent_Tag">&lt;s:TileLayout</span><span class="MXMLDefault_Text"> horizontalAlign="</span><span class="MXMLString">left</span><span class="MXMLDefault_Text">" orientation="</span><span class="MXMLString">columns</span><span class="MXMLDefault_Text">" verticalAlign="</span><span class="MXMLString">top</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+                <span class="MXMLComponent_Tag">&lt;/s:layout&gt;</span>
+                <span class="MXMLComponent_Tag">&lt;components:GraphTab</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">graphTab</span><span class="MXMLDefault_Text">"
+                                     usersData="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">usersData</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">"
+                                     x="</span><span class="MXMLString">30</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">90</span><span class="MXMLDefault_Text">"
+                                     showPreview="</span><span class="ActionScriptDefault_Text">chooseEmployee_showPreviewHandler</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span><span class="ActionScriptBracket/Brace">)</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+                
+            <span class="MXMLComponent_Tag">&lt;/s:BorderContainer&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;/s:NavigatorContent&gt;</span>
+        
+        <span class="MXMLComponent_Tag">&lt;s:NavigatorContent</span><span class="MXMLDefault_Text"> label="</span><span class="MXMLString">All data</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">&gt;</span>
+            
+            <span class="MXMLComponent_Tag">&lt;components:AllDataTab</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">allDataTab</span><span class="MXMLDefault_Text">"
+                                 usersData="</span><span class="MXMLString">{</span><span class="ActionScriptDefault_Text">usersData</span><span class="MXMLString">}</span><span class="MXMLDefault_Text">"
+                                 x="</span><span class="MXMLString">30</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">90</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+                        
+        <span class="MXMLComponent_Tag">&lt;/s:NavigatorContent&gt;</span>
+    <span class="MXMLComponent_Tag">&lt;/mx:TabNavigator&gt;</span>
+            
+    <span class="MXMLComponent_Tag">&lt;s:Panel</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">login</span><span class="MXMLDefault_Text">" includeIn="</span><span class="MXMLString">loginState</span><span class="MXMLDefault_Text">" x="</span><span class="MXMLString">50</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">50</span><span class="MXMLDefault_Text">" width="</span><span class="MXMLString">30%</span><span class="MXMLDefault_Text">" height="</span><span class="MXMLString">30%</span><span class="MXMLDefault_Text">" title="</span><span class="MXMLString">LOGIN</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:layout&gt;</span>
+            <span class="MXMLComponent_Tag">&lt;s:VerticalLayout</span><span class="MXMLDefault_Text"> gap="</span><span class="MXMLString">10</span><span class="MXMLDefault_Text">" paddingTop="</span><span class="MXMLString">15</span><span class="MXMLDefault_Text">" paddingBottom="</span><span class="MXMLString">15</span><span class="MXMLDefault_Text">" paddingRight="</span><span class="MXMLString">15</span><span class="MXMLDefault_Text">" paddingLeft="</span><span class="MXMLString">15</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>        
+        <span class="MXMLComponent_Tag">&lt;/s:layout&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:Label</span><span class="MXMLDefault_Text"> x="</span><span class="MXMLString">26</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">33</span><span class="MXMLDefault_Text">" text="</span><span class="MXMLString">Username:</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:TextInput</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">username</span><span class="MXMLDefault_Text">" x="</span><span class="MXMLString">97</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">23</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:Label</span><span class="MXMLDefault_Text"> x="</span><span class="MXMLString">26</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">71</span><span class="MXMLDefault_Text">" text="</span><span class="MXMLString">Password:</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:TextInput</span><span class="MXMLDefault_Text"> id="</span><span class="MXMLString">password</span><span class="MXMLDefault_Text">" x="</span><span class="MXMLString">97</span><span class="MXMLDefault_Text">" y="</span><span class="MXMLString">61</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+        <span class="MXMLComponent_Tag">&lt;s:Button</span><span class="MXMLDefault_Text"> label="</span><span class="MXMLString">Sumbit</span><span class="MXMLDefault_Text">" click="</span><span class="ActionScriptDefault_Text">attemptLogin</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span><span class="MXMLDefault_Text">"</span><span class="MXMLComponent_Tag">/&gt;</span>
+    <span class="MXMLComponent_Tag">&lt;/s:Panel&gt;</span>
+    
+<span class="MXMLComponent_Tag">&lt;/s:Application&gt;</span></pre></body>
+</html>

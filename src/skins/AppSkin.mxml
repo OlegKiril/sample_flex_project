@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark">
+    
+    <!-- Properties of the parent ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    <!-- All skins requires a states property that includes at least the normal state -->
+    
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+		<s:State name="portalState"/>
+		<s:State name="loginState"/>
+    </s:states>
+    
+    <!-- Metadata ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    <!-- The Metadata block contains the HostComponent directive, which declares which component this skin will be applied to -->
+            
+    <!-- This section defines the background shape and colors for the skin -->
+    
+    <s:Rect includeIn="normal,portalState" top="20" width="750"
+			height="550" radiusX="10" left="20">
+        
+        <s:fill>
+            <s:SolidColor color="#aeaeae" />
+        </s:fill>
+        
+        <s:stroke>
+            <s:SolidColorStroke color="#AAAAAA" />
+        </s:stroke>
+        
+    </s:Rect>
+    
+    <!-- 
+    The Group container must have an id property with a value of contentGroup.
+    This defines the container display layout and properties for the Application 
+    container's content children.
+    -->
+    
+    <s:Group id="contentGroup" includeIn="normal,portalState" top="20" bottom="20" right="20" left="20">		
+        
+    </s:Group>	
+    
+</s:SparkSkin>

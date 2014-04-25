@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	      xmlns:s="library://ns.adobe.com/flex/spark" 
+	   	  xmlns:mx="library://ns.adobe.com/flex/mx" 
+	  	  gap="15" xmlns:components="components.*">
+    
+    <!-- Properties of the parent ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+   
+    
+    
+    <!-- Metadata ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    <fx:Metadata>
+		[Event(name="showPreview", type="events.ShowPreview")]
+	</fx:Metadata>
+    
+    <!-- Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    
+    
+    <!-- Script ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    <fx:Script>
+        <![CDATA[
+			
+			// import statements ----------------------------------------
+			
+			import events.ShowPreview;
+			
+			import mx.collections.ArrayCollection;
+            
+            // variable declarations ------------------------------------
+            
+            [Bindable]
+            public var usersData:ArrayCollection;
+			            
+            // getter/setters -------------------------------------------
+            
+            
+            // helper methods -------------------------------------------
+            
+            
+            // event handlers -------------------------------------------
+            
+			protected function preview_clickHandler(event:MouseEvent):void
+			{
+				//var eventObject:ShowPreview = new ShowPreview("showPreview", employeeList.selectedItem, message.text);
+				//dispatchEvent(eventObject);
+			}
+			
+			private function myEventHandler(e:Event, userData:Object):void { 				
+				var eventObject:ShowPreview = new ShowPreview("showPreview", userData);
+				dispatchEvent(eventObject);
+			}
+			
+		]]>
+    </fx:Script>
+    
+    <!-- Declarations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    
+    
+    <!-- UI components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+	<s:Group id="employeeGroup" x="119" y="23" width="272" height="376"
+			 textAlign="center">
+		<s:Group width="324" height="646">
+			
+			<s:layout>
+				<s:TileLayout horizontalAlign="center" paddingTop="15"/>
+			</s:layout>
+			
+			<components:EmployeeDisplay id="id_0" y="86" click="myEventHandler(event,usersData[0])"
+										empImage="images/{usersData[0].id}.jpg"
+										empName="{usersData[0].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_1" click="myEventHandler(event,usersData[1])"
+										empImage="images/{usersData[1].id}.jpg"
+										empName="{usersData[1].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_2" click="myEventHandler(event,usersData[2])"
+										empImage="images/{usersData[2].id}.jpg"
+										empName="{usersData[2].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_3" click="myEventHandler(event,usersData[3])"
+										empImage="images/{usersData[3].id}.jpg"
+										empName="{usersData[3].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_4" click="myEventHandler(event,usersData[4])"
+										empImage="images/{usersData[4].id}.jpg"
+										empName="{usersData[4].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_5" click="myEventHandler(event,usersData[5])"
+										empImage="images/{usersData[5].id}.jpg"
+										empName="{usersData[5].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_6" click="myEventHandler(event,usersData[6])"
+										empImage="images/{usersData[6].id}.jpg"
+										empName="{usersData[6].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_7" x="138" y="197" click="myEventHandler(event,usersData[7])"
+										empImage="images/{usersData[7].id}.jpg"
+										empName="{usersData[7].firstName}"/>
+			
+			<components:EmployeeDisplay id="id_8" x="138" y="197" click="myEventHandler(event,usersData[8])"
+										empImage="images/{usersData[8].id}.jpg"
+										empName="{usersData[8].firstName}"/>
+			
+		</s:Group>
+	</s:Group>
+	
+	<s:Scroller viewport="{employeeGroup}"/>
+ 
+</s:VGroup>

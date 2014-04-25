@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+									
+			[Bindable]
+			public var usersData:ArrayCollection;
+						
+		]]>
+	</fx:Script>
+	
+	<s:DataGrid x="10" y="10" width="428" alternatingRowColors="[#FFFFFF, #CCCCCC]" requestedRowCount="4">
+		
+	<s:columns>
+	<s:ArrayList>
+	<s:GridColumn dataField="dataField1" headerText="FirstName"></s:GridColumn>
+	<s:GridColumn dataField="dataField2" headerText="LastName"></s:GridColumn>
+	<s:GridColumn dataField="dataField3" headerText="Email"></s:GridColumn>
+	<s:GridColumn dataField="dataField4" headerText="BirthdayDate"></s:GridColumn>
+	</s:ArrayList>
+	</s:columns>
+	
+	<s:typicalItem>
+	<fx:Object dataField1="Sample Data" dataField2="Sample Data"
+	dataField3="Sample Data" dataField4="Sample Data"></fx:Object>
+	</s:typicalItem>
+	
+	<s:ArrayList>
+	<fx:Object dataField1="{usersData[0].firstName}" dataField2="{usersData[0].lastName}" dataField3="{usersData[0].email}" dataField4="{usersData[0].day_of_birth}/{usersData[0].month_of_birth}/{usersData[0].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[1].firstName}" dataField2="{usersData[1].lastName}" dataField3="{usersData[1].email}" dataField4="{usersData[1].day_of_birth}/{usersData[1].month_of_birth}/{usersData[1].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[2].firstName}" dataField2="{usersData[2].lastName}" dataField3="{usersData[2].email}" dataField4="{usersData[2].day_of_birth}/{usersData[2].month_of_birth}/{usersData[2].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[3].firstName}" dataField2="{usersData[3].lastName}" dataField3="{usersData[3].email}" dataField4="{usersData[3].day_of_birth}/{usersData[3].month_of_birth}/{usersData[3].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[4].firstName}" dataField2="{usersData[4].lastName}" dataField3="{usersData[4].email}" dataField4="{usersData[4].day_of_birth}/{usersData[4].month_of_birth}/{usersData[4].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[5].firstName}" dataField2="{usersData[5].lastName}" dataField3="{usersData[5].email}" dataField4="{usersData[5].day_of_birth}/{usersData[5].month_of_birth}/{usersData[5].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[6].firstName}" dataField2="{usersData[6].lastName}" dataField3="{usersData[6].email}" dataField4="{usersData[6].day_of_birth}/{usersData[6].month_of_birth}/{usersData[6].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[7].firstName}" dataField2="{usersData[7].lastName}" dataField3="{usersData[7].email}" dataField4="{usersData[7].day_of_birth}/{usersData[7].month_of_birth}/{usersData[7].year_of_birth}"></fx:Object>
+	<fx:Object dataField1="{usersData[8].firstName}" dataField2="{usersData[8].lastName}" dataField3="{usersData[8].email}" dataField4="{usersData[8].day_of_birth}/{usersData[8].month_of_birth}/{usersData[8].year_of_birth}"></fx:Object>
+	</s:ArrayList>
+	</s:DataGrid>
+	
+</s:Group>
+
+
